@@ -12,6 +12,7 @@ const chartRoutes = require("./routes/chartRoutes");
 const reportsysRoutes = require("./routes/reportsysRoutes");
 const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 const path = require("path");
+const http = require("http");
 
 dotenv.config();
 connectDB();
@@ -56,6 +57,12 @@ const server = app.listen(
   PORT,
   console.log(`Server running on PORT ${PORT}...`.yellow.bold)
 );
+
+ 
+/* Prevent Sleep in Heroku Server */
+setInterval(function () {
+  http.get("https://roksrs-backend.herokuapp.com/");
+}, 600000); // every 10 minutes
 
 const io = require("socket.io")(server, {
   pingTimeout: 60000,
