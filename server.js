@@ -61,7 +61,7 @@ const server = app.listen(
  
 /* Prevent Sleep in Heroku Server */
 setInterval(function () {
-  http.get("https://roksrs-backend.herokuapp.com/");
+  http.get("http://roksrs-backend.herokuapp.com");
 }, 600000); // every 10 minutes
 
 const io = require("socket.io")(server, {
